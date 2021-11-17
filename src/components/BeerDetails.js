@@ -1,11 +1,12 @@
 import React from 'react';
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 import Navbar from './Navbar';
 
-class BeerDetails extends Component {
-  state = {
+const BeerDetails = (props) => {
+  const [beerDetail, setBeerDetail] = useState({
     _id: '',
     image_url: '',
     name: '',
@@ -14,58 +15,50 @@ class BeerDetails extends Component {
     attenuation_level: 0,
     description: '',
     contributed_by: '',
-  };
+  })
 
-  componentDidMount = async () => {
-    try {
-      const id = this.props.match.params._id;
-      
-      const response = await axios.get(
-        `https://ih-beers-api2.herokuapp.com/beers/${id}`
-      );
-      
-      this.setState({ ...response.data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const {id} = useParams();
+  
+  useEffect(() => {
+        axios.get(
+       `https://ih-beers-api2.herokuapp.com/beers/${id}`
+      ).then(res => setBeerDetail({ ...res.data })).catch(error => console.error(error))     
+  }, [])
 
-  render() {
       return (
         <div className="beer-details">
           <Navbar />
 
           <img
             className="beer-details-img"
-            src={this.state.image_url}
+            src={beerDetail.image_url}
             alt="Single beer"
           />
 
           <div className="beer-details-section">
-            <p className="beer-detail-section-name">{this.state.name}</p>
+            <p className="beer-detail-section-name">{beerDetail.name}</p>
             <p className="beer-details-section-attenuation">
-              {this.state.attenuation_level}
+              {beerDetail.attenuation_level}
             </p>
           </div>
 
           <div className="beer-details-sectionTwo">
             <p className="beer-details-sectionTwo-tagline">
-              {this.state.tagline}
+              {beerDetail.tagline}
             </p>
 
             <p className="beer-details-sectionTwo-firstBrewed">
-              {this.state.first_brewed}
+              {beerDetail.first_brewed}
             </p>
           </div>
 
-          <p className="beer-details-description">{this.state.description}</p>
+          <p className="beer-details-description">{beerDetail.description}</p>
 
           <p className="beer-details-contributedBy">
-            {this.state.contributed_by}
+            {beerDetail.contributed_by}
           </p>
         </div>
       );
-  }
 }
 
 export default BeerDetails;

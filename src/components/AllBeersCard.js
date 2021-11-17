@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function AllBeersCard(props) {
     return (
       <div className="card">
-        <Link to={`/${props._id}`} title="All Beers">
+        <Link to={`/detail/${props._id}`} title="All Beers">
           <img className="card-img" src={props.image_url} alt="Single beer" />
         </Link>
 

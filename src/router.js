@@ -11,11 +11,11 @@ function Router() {
       <BrowserRouter>
         <div>
           <Routes>
-            <Route exact path="/" element={<Home />}></Route>
-            <Route path="/beers" element={<AllBeers />}></Route>
-            <Route path="/new" element={<NewBeer />}></Route>
-            <Route path="/random" element={<RandomBeer />}></Route>
-            <Route path="/:id" element={<BeerDetails />}></Route>
+            <Route exact path="/" element={<Home />}/>
+            <Route path="/beers" element={<AllBeers />}/>
+            <Route path="/detail/:id" element={<BeerDetails />}/>
+            <Route path="/new" element={<NewBeer />}/>
+            <Route path="/random" element={<RandomBeer />}/>
           </Routes>
         </div>
       </BrowserRouter>
