@@ -6,6 +6,7 @@ import AllBeers from './components/AllBeers';
 import NewBeer from './components/NewBeer';
 import RandomBeer from './components/RandomBeer';
 import BeerDetails from './components/BeerDetails';
+
 function Router() {
     return (
       <BrowserRouter>
